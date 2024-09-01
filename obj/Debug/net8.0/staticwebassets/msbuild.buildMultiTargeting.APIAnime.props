@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\APIAnime.props" />
+</Project>
