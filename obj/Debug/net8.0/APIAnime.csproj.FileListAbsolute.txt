@@ -102,3 +102,10 @@ C:\Users\vicen\source\repos\APIAnime\APIAnime\bin\Debug\net8.0\System.Net.Http.F
 C:\Users\vicen\source\repos\APIAnime\APIAnime\bin\Debug\net8.0\System.Web.Http.dll
 C:\Users\vicen\source\repos\APIAnime\APIAnime\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\vicen\source\repos\APIAnime\APIAnime\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
+C:\Users\vicen\source\repos\APIAnime\APIAnime\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\vicen\source\repos\APIAnime\APIAnime\obj\Debug\net8.0\APIAnime.sourcelink.json
+C:\Users\vicen\source\repos\APIAnime\apianime\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\vicen\source\repos\APIAnime\apianime\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\vicen\source\repos\APIAnime\apianime\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\vicen\source\repos\APIAnime\apianime\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\vicen\source\repos\APIAnime\apianime\obj\Debug\net8.0\APIAnime.MvcApplicationPartsAssemblyInfo.cs

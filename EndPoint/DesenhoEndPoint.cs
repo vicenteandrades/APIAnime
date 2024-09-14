@@ -7,14 +7,18 @@ public static class DesenhoEndPoint
 {
     public static void AddEndPointDesenho(this WebApplication app)
     {
-        app.MapGet("/desenhos", async ([FromServices] DesenhoRepository desenhoRepository) =>
+        var groupBuilder = app.MapGroup("desenhos")
+                                .RequireAuthorization()
+                                .WithTags("Desenhos");
+
+        groupBuilder.MapGet("", async ([FromServices] DesenhoRepository desenhoRepository) =>
         {
             var list = await desenhoRepository.GetAsync();
             return (list.Any() ) ? Results.Ok(list) : Results.NotFound("Ainda não há desenho cadastro!");
         });
 
 
-        app.MapGet("/desenhos/{id}", async ([FromServices] DesenhoRepository desenhoRepository, int id) =>
+        groupBuilder.MapGet("{id}", async ([FromServices] DesenhoRepository desenhoRepository, int id) =>
         {
             var desenho = await desenhoRepository.GetByIdAsync(id);
 
@@ -22,7 +26,7 @@ public static class DesenhoEndPoint
         });
 
 
-        app.MapPost("/desenhos", ([FromServices] DesenhoRepository desenhoRepository, [FromBody] Desenho desenhoPost) =>
+        groupBuilder.MapPost("", ([FromServices] DesenhoRepository desenhoRepository, [FromBody] Desenho desenhoPost) =>
         {
             var created = desenhoRepository.Create(desenhoPost);
 
@@ -30,7 +34,7 @@ public static class DesenhoEndPoint
         });
 
 
-        app.MapPut("/desenhos", ([FromServices] DesenhoRepository desenhoRepository, [FromBody] Desenho desenhoPost) =>
+        app.MapPut("", ([FromServices] DesenhoRepository desenhoRepository, [FromBody] Desenho desenhoPost) =>
         {
             var find = desenhoRepository.GetById(desenhoPost.DesenhoId);
 
@@ -49,7 +53,7 @@ public static class DesenhoEndPoint
 
         });
 
-        app.MapDelete("/desenhos/{id}", ([FromServices] DesenhoRepository desenhoRepository, int id) =>
+        groupBuilder.MapDelete("{id}", ([FromServices] DesenhoRepository desenhoRepository, int id) =>
         {
             var find = desenhoRepository.GetById(id);
 
