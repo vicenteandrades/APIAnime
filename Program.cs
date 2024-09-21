@@ -3,6 +3,7 @@ using APIAnime.EndPoint;
 using APIAnime.Model;
 using APIAnime.Repository;
 using APIAnime.Repository.Model;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json.Serialization;
@@ -29,6 +30,12 @@ app.AddEndPointGenero();
 app.AddEndPointDesenho();
 app.AddEndPointPersonagem();
 app.MapGroup("auth").MapIdentityApi<PessoaComAcesso>().WithTags("Autorização");
+app.MapPost("auth/logout", async ([FromServices] SignInManager<PessoaComAcesso> _signInManager) =>
+{
+    await _signInManager.SignOutAsync();
+    return Results.Ok();
+}).RequireAuthorization().WithTags("Autorização") ;
+
 app.UseAuthorization();
 
 app.UseSwagger();

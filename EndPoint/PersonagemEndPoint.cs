@@ -8,14 +8,18 @@ public static class PersonagemEndPoint
 {
     public static void AddEndPointPersonagem(this WebApplication app)
     {
-        app.MapGet("/personagens", async ([FromServices] PersonagemRepository personagemRepository) =>
+        var groupBuilder = app.MapGroup("personagens")
+                                .RequireAuthorization()
+                                .WithTags("Personagens");
+
+        groupBuilder.MapGet("", async ([FromServices] PersonagemRepository personagemRepository) =>
         {
             var list = await personagemRepository.GetAsync();
 
             return (list.Any()) ? Results.Ok(list) : Results.NotFound("Ainda não possuimos personagens cadastrados!");
         });
 
-        app.MapGet("/personagens/{id}", async ([FromServices] PersonagemRepository personagemRepository, int id) =>
+        groupBuilder.MapGet("{id}", async ([FromServices] PersonagemRepository personagemRepository, int id) =>
         {
             var personagem = await personagemRepository.GetByIdAsync(id);
 
@@ -23,7 +27,7 @@ public static class PersonagemEndPoint
 
         });
 
-        app.MapPost("/personagens", ([FromServices] PersonagemRepository personagemRepository, [FromBody] Personagem personagemPost) =>
+        groupBuilder.MapPost("", ([FromServices] PersonagemRepository personagemRepository, [FromBody] Personagem personagemPost) =>
         {
             if(personagemPost is not null)
             {
@@ -36,7 +40,7 @@ public static class PersonagemEndPoint
         });
 
 
-        app.MapPut("/personagens", ([FromServices] PersonagemRepository personagemRepository, [FromBody] Personagem personagemPost) =>
+        groupBuilder.MapPut("", ([FromServices] PersonagemRepository personagemRepository, [FromBody] Personagem personagemPost) =>
         {
             var find = personagemRepository.GetById(personagemPost.PersonagemId);
             if (find is not null)
@@ -53,7 +57,7 @@ public static class PersonagemEndPoint
             return Results.NotFound($"Não conseguimos atualizar {personagemPost.Name}");
         });
 
-        app.MapDelete("/personagens/{id}", ([FromServices] PersonagemRepository personagemRepository, int id) =>
+        groupBuilder.MapDelete("{id}", ([FromServices] PersonagemRepository personagemRepository, int id) =>
         {
             var find = personagemRepository.GetById(id);
 

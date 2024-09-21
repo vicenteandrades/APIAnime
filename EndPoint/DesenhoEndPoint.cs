@@ -34,7 +34,7 @@ public static class DesenhoEndPoint
         });
 
 
-        app.MapPut("", ([FromServices] DesenhoRepository desenhoRepository, [FromBody] Desenho desenhoPost) =>
+        groupBuilder.MapPut("", ([FromServices] DesenhoRepository desenhoRepository, [FromBody] Desenho desenhoPost) =>
         {
             var find = desenhoRepository.GetById(desenhoPost.DesenhoId);
 
